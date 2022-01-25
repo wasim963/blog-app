@@ -1,0 +1,95 @@
+.ui-settings {
+    display: flex;
+
+    &__wrapper {
+        flex: 9;
+        margin: 50px 50px 0 30px;
+
+        &__header {
+            display: flex;
+            padding: 10px 20px 10px 0;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+
+            &__title {
+                font-size: 40px;
+                color: rgb(226, 126, 126);
+            }
+
+            &__delete {
+                font-size: 16px;
+                color: rgb(182, 73, 73);
+                font-weight: 400;
+                cursor: pointer;
+            }
+        }
+
+        &__form {
+
+            display: flex;
+            flex-direction: column;
+
+            &__title {
+                font-size: 18px;
+            }
+
+            &__group {
+
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px;
+                width: 100%;
+
+                &__pp {
+                    width: 80px;
+                    height: 80px;
+                    object-fit: cover;
+                    border-radius: 40%;
+                    margin: 0px 16px 10px 0;
+                }
+
+                &__user {
+                    font-size: 30px;
+                    color: rgb(182, 73, 73);
+                }
+
+                &__label {
+                    font-size: 24px;
+                    margin: 10px 0;
+                }
+
+                &__input {
+                    width: 100%;
+                    height: 40px;
+                    border: none;
+                    border-bottom: 1px solid #999;
+                }
+
+                .textInput:focus {
+                    outline: none;
+                }
+            }
+
+            :nth-child(2) {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            &__submit {
+                border: none;
+                padding: 10px 20px;
+                background: teal;
+                cursor: pointer;
+                color: #fff;
+                font-size: 18px;
+                border-radius: 5px;
+                width: 180px;
+                align-self: center;
+                margin-top: 30px;
+            }
+
+
+        }
+    }
+}

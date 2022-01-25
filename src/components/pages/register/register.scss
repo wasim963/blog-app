@@ -1,0 +1,60 @@
+.ui-register {
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient( rgba(247, 242, 226, 0.753), rgba(241, 241, 222, 0.5) ), url('../../../assets/images/register-pic.jpg');
+    object-fit: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    &__title {
+        font-size: 30px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        color: #444;
+        width: 300px;
+
+
+        &__label {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        &__input {
+            height: 40px;
+            border: none;
+            padding-left: 10px;
+        }
+
+        &__registerBtn {
+            border: none;
+            color: #fff;
+            background-color: tomato;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 30px;
+            border-radius: 5px;
+            margin-top: 24px;
+        }
+    }
+
+    &__loginBtn {
+        border: none;
+        color: #fff;
+        background-color: teal;
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 16px;
+        padding: 10px 30px;
+        border-radius: 5px;
+    }
+
+}
