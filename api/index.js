@@ -42,5 +42,5 @@ app.use( '/api/posts', postsRoute );
 app.use( '/api/categories', categoriesRoute );
 
 app.listen( 5000, () => {
-    console.log( "Server Running..." );
+    console.log( "Server Running on port 5000..." );
 } );

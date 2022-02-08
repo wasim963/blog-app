@@ -20,7 +20,7 @@ function App() {
       <Topbar />
       <Routes>
           <Route path='/' element={ <Home /> } />
-          <Route path='write' element={ user ? <Write /> : <Login /> } />
+          <Route path='write' element={ <Write /> } />
           <Route path='setting' element={ <Settings /> } />
           <Route path='login' element={ <Login /> } />
           <Route path='register' element={ <Register /> } />

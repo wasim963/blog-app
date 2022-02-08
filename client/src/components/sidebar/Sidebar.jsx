@@ -1,17 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import AboutMePic from '../../assets/images/p-icon.jpg';
 import './sidebar.scss';
 
 export function Sidebar(props) {
+  
+  const [ cats, setCats ] = useState( [] );
+
+  useEffect(() => {
+    const fetchCats = async () => {
+        try {
+            const res = await axios.get( '/categories/' );
+            setCats( res.data )
+        } catch (err) {
+            console.log( err );
+        }
+    }
+
+    fetchCats();
+  }, [] );
+  
   return (
     <div className='ui-sidebar'>
         <div className="ui-sidebar__item">
             <div className="ui-sidebar__item__title">
                 <span>About Me</span>
             </div>
-            <img className='ui-sidebar__item__image' src={ AboutMePic } alt="About Me Pic" srcset="" />
+            <img className='ui-sidebar__item__image' src={ AboutMePic } alt="About Me Pic" srcSet="" />
             <div className="ui-sidebar__item__description">
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque alias ut,
                 molestiae blanditiis perferendis veritatis magnam voluptate quos
@@ -27,12 +44,13 @@ export function Sidebar(props) {
                 <span>Categories</span>
             </div>
             <div className="ui-sidebar__item__catgories">
-                <div className="ui-sidebar__item__catgories__item">Life</div>
-                <div className="ui-sidebar__item__catgories__item">Music</div>
-                <div className="ui-sidebar__item__catgories__item">Style</div>
-                <div className="ui-sidebar__item__catgories__item">Sport</div>
-                <div className="ui-sidebar__item__catgories__item">Cinema</div>
-                <div className="ui-sidebar__item__catgories__item">Tech</div>
+                {
+                    cats.map( ( cat, index ) => {
+                        return( 
+                            <Link to={ `/?cat=${ cat.name }` } className="ui-sidebar__item__catgories__item" key={index} >{ cat.name }</Link>
+                         )
+                    } )
+                }
             </div>
         </div>
         <div className="ui-sidebar__item">

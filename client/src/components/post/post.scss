@@ -12,10 +12,12 @@
         height: auto;
         object-fit: cover;
         border-radius: 7px;
-        cursor: pointer;
     }
 
     &__info {
+
+        display: flex;
+        flex-direction: column;
 
         &__cats {
             display: flex;
@@ -30,6 +32,7 @@
         &__title {
             color: rgb(126, 174, 228);
             text-align: center;
+            text-decoration: none;
         }
 
         &__date {
