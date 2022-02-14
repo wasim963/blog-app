@@ -12,7 +12,7 @@ export function Header(props) {
             <div className="ui-header__titles__Sm">React & Node</div>
             <div className="ui-header__titles__Lg">Blog</div>
         </div>
-        <img className='ui-header__image' src={ headerImage } alt='Header Pic' />
+        <img className='ui-header__image' src={ headerImage } srcSet='' alt='Header Pic' />
     </div>
   );
 }

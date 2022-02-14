@@ -1,18 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
+import React, { useContext } from 'react';
 import './topbar.scss';
 
 import { NavLink, useNavigate } from 'react-router-dom';
-import profileIcon from '../../assets/images/p-icon2.jpg';
+import { Context } from '../../context/Context';
 
-
+import { LOGOUT_SUCCESS, LOGIN_FAILURE } from '../../constants/ActionTypes';
 
 
 export function Topbar(props) {
-
    const navigate = useNavigate(); 
-   const user = false;
+   const { user, dispatch } = useContext( Context );
+   const PF = 'http://localhost:5000/uploads/';
+
+   const handleLogout = async () => {
+       try {
+            dispatch( { type: LOGOUT_SUCCESS } );
+
+            window.location.replace('/')
+       } catch (error) {
+           dispatch( { type: LOGIN_FAILURE } )
+       }
+   }
 
   return(
     <div className='ui-topbar' >
@@ -29,13 +37,13 @@ export function Topbar(props) {
                 <NavLink className="ui-topbar__center__list__item" to='/about' > ABOUT </NavLink>
                 <NavLink className="ui-topbar__center__list__item" to='/contact' > CONTACT </NavLink>
                 <NavLink className="ui-topbar__center__list__item" to='/write' > WRITE </NavLink>
-                { user && <NavLink className="ui-topbar__center__list__item" to='/logout' > LOGOUT </NavLink> }
+                { user && <li className="ui-topbar__center__list__item" onClick={ handleLogout } > LOGOUT </li> }
             </ul>
         </div>
         <div className="ui-topbar__right">
             {
                 user ? (
-                    <img className='ui-topbar__right__image' onClick={ () => navigate( '/setting' )} src={ profileIcon } alt='Profile Pic' />
+                    <img className='ui-topbar__right__image' onClick={ () => navigate( '/setting' )} src={ PF + user.profilePic } alt='Profile Pic' />
                 ) :
                 (
                     <ul className="ui-topbar__right__list">

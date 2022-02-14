@@ -1,45 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import './post.scss';
 
-import { useNavigate } from 'react-router-dom';
-
-import PostImage from '../../assets/images/post-image.jpg'
-
-export function Post(props) {
-
-
-  const navigate = useNavigate();
+import { Link } from 'react-router-dom';
+import PostImage from '../../assets/images/post-image.jpg';
+export function Post({ post }) {
+  const PF = 'http://localhost:5000/uploads/';
+  const { categories } = post;
 
   return(
     <div className='ui-post'>
-        <img className='ui-post__image' onClick={ () => navigate('/posts/1') }  src={ PostImage } alt="Post Pic" srcset="" />
+        {
+            
+        }
+        <img className='ui-post__image'  src={ PF + post.photo } alt="Post Pic" srcSet="" />
         <div className="ui-post__info">
             <div className="ui-post__info__cats">
-                <div className="ui-post__info__cats__cat">
-                    Life
-                </div>
-                <div className="ui-post__info__cats__cat">
-                    Style
-                </div>
+                {
+                    categories.map( ( cat, index ) => {
+                        return (
+                            <div className="ui-post__info__cats__cat" key={ index }>
+                                { cat }
+                            </div>
+                        )
+                    } )
+                }
             </div>
-            <div className="ui-post__info__title">
-                Lorem ipsum dolor sit amet.
-            </div>
-            <div className="ui-post__info__date">1 hour ago</div>
+            <Link className='ui-post__info__title link' to={`/posts/${ post._id }`} >{ post.title }</Link>
+            <div className="ui-post__info__date">{ new Date( post.createdAt ).toDateString() }</div>
         </div>
         <p className="ui-post__description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Possimus quibusdam consectetur saepe aut aliquid necessitatibus amet tempore expedita,
-            reiciendis veniam ipsam quasi fugit quam totam dicta quaerat. Magnam, ab praesentium.
-            Vero sed alias, velit voluptate ullam sit earum nesciunt, assumenda omnis dolorum optio,
-            voluptatibus cum tenetur! Sapiente eum ab impedit modi saepe dolores architecto sint repellendus quisquam,
-            distinctio alias sequi. consectetur saepe aut aliquid necessitatibus amet tempore expedita,
-            reiciendis veniam ipsam quasi fugit quam totam dicta quaerat. Magnam, ab praesentium.
-            Vero sed alias, velit voluptate ullam sit earum nesciunt, assumenda omnis dolorum optio,
-            voluptatibus cum tenetur! Sapiente eum ab impedit modi saepe dolores architecto sint repellendus quisquam,
-            distinctio alias sequi.
+            { post.description }
         </p>
     </div>
   );

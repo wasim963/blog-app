@@ -17,17 +17,18 @@
 
         &__header {
             display: flex;
+            width: 100%;
 
             &__title {
-                flex: 8;
+                font-size: 24px;
+                flex: 7;
                 display: flex;
                 justify-content: flex-end;
-                font-size: 24px;
-
             }
 
             &__icons {
-                flex: 4;
+                flex: 5;
+                justify-self: flex-end;
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
@@ -42,6 +43,18 @@
                 :last-child {
                     color: tomato;
                 }
+            }
+
+            &__input {
+                height: 50px;
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid grey;
+                outline: none;
+                margin-top: 20px;
+                font-size: 36px;
+                color: gray;
+                text-align: center;
             }
         }
 
@@ -58,17 +71,65 @@
 
                 &__value {
                     color: rgb(221, 158, 23);
+                    text-decoration: none;
                 }
             }
 
             &__date {
                 color: rgb(155, 108, 8);
             }
+
+            &__input {
+                height: 44px;
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid grey;
+                outline: none;
+                margin-top: 30px;
+                font-size: 20px;
+                color: gray;
+                text-align: center;
+            }
         }
 
         &__description {
             line-height: 24px;
             font-size: 16px;
+
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: row;
+
+            &__navigation {
+
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                &__submit,
+                &__cancel {
+                    color: #fff;
+                    background-color: teal;
+                    border-radius: 5px;
+                    width: 150px;
+                    height: 30px;
+                    cursor: pointer;
+                    border: none;
+                    margin: 20px 3px 0px 3px;
+                }
+
+                &__cancel {
+                    background-color: rgb(252, 110, 99);
+                }
+            }
+        }
+
+        &__message {
+            color: green;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

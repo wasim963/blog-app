@@ -41,6 +41,16 @@
             padding: 10px 30px;
             border-radius: 5px;
             margin-top: 24px;
+
+            :disabled {
+                background-color: rgb(252, 181, 168);
+                cursor: not-allowed;
+            }
+        }
+
+        &__loginBtn:disabled {
+            background-color: rgb(252, 181, 168);
+            cursor: not-allowed;
         }
     }
 
