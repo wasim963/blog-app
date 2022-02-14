@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
 
@@ -10,17 +11,18 @@ import { Single } from './components/pages/single/Single';
 import { Write } from './components/pages/write/Write';
 import { Topbar } from './components/topbar/Topbar';
 import { NoMatch } from './components/pages/noMatch/NoMatch';
+import { Context } from './context/Context';
 
 function App() {
 
-  const user = false
+  const { user } = useContext( Context );
 
   return (
     <div className="App">
       <Topbar />
       <Routes>
           <Route path='/' element={ <Home /> } />
-          <Route path='write' element={ <Write /> } />
+          <Route path='write' element={ user ? <Write /> : <Register /> } />
           <Route path='setting' element={ <Settings /> } />
           <Route path='login' element={ <Login /> } />
           <Route path='register' element={ <Register /> } />

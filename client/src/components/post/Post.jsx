@@ -4,11 +4,15 @@ import './post.scss';
 import { Link } from 'react-router-dom';
 import PostImage from '../../assets/images/post-image.jpg';
 export function Post({ post }) {
-
+  const PF = 'http://localhost:5000/uploads/';
   const { categories } = post;
+
   return(
     <div className='ui-post'>
-        <img className='ui-post__image'  src={ PostImage } alt="Post Pic" srcSet="" />
+        {
+            
+        }
+        <img className='ui-post__image'  src={ PF + post.photo } alt="Post Pic" srcSet="" />
         <div className="ui-post__info">
             <div className="ui-post__info__cats">
                 {

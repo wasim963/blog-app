@@ -23,18 +23,18 @@ router.post('/register', async( req, res ) => {
 } );
 
 // LOGIN
-router.get( '/login', async( req, res ) => {
+router.post( '/login', async( req, res ) => {
     try {
 
         const user = await User.findOne( { username: req.body.username } );
-        !user && res.status(400).json('Wrong Credentials!');
+        !user && res.status(200).json({ status: 'error', message: 'User does not exist!' } );
 
         const validated = await bcrypt.compare( req.body.password, user.password );
-        !validated && res.status(400).json('Wrong Credentials!');
+        !validated && res.status(200).json({ status: 'error', message: 'Wrong password!' });
 
         const { password, ...rest } = user._doc;
 
-        res.status(200).json(rest)
+        res.status(200).json({ status: 'success', user: rest })
     } catch( err ) {
         res.status(500).json(err);
     }
