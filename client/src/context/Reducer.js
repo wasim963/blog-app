@@ -5,7 +5,8 @@ import {
     LOGOUT_SUCCESS,
     UPDATE_START,
     UPDATE_SUCCESS,
-    UPDATE_FAILURE } from '../constants/ActionTypes';
+    UPDATE_FAILURE 
+} from '../constants/ActionTypes';
 
 export const Reducer = ( state, action ) => {
 

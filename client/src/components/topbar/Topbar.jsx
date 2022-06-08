@@ -1,20 +1,27 @@
 import React, { useContext } from 'react';
-import './topbar.scss';
-
+import axios from 'axios';
 import { NavLink, useNavigate } from 'react-router-dom';
+
+// Local Dependencies
+import './topbar.scss';
 import { Context } from '../../context/Context';
-
 import { LOGOUT_SUCCESS, LOGIN_FAILURE } from '../../constants/ActionTypes';
-
-
 export function Topbar(props) {
    const navigate = useNavigate(); 
    const { user, dispatch } = useContext( Context );
    const PF = 'http://localhost:5000/uploads/';
 
+   /**
+    * Used to logout of the portal
+    */
    const handleLogout = async () => {
        try {
-            dispatch( { type: LOGOUT_SUCCESS } );
+            const res = await axios.post( '/auth/logout/', {}, { headers: { auth_token: 'Bearer ' + user.accessToken } } )
+            if( res.data.status === 'success' ) { 
+                dispatch( { type: LOGOUT_SUCCESS } );
+            } else {
+                console.log( res );
+            }
 
             window.location.replace('/')
        } catch (error) {

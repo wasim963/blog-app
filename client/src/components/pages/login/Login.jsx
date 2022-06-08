@@ -1,10 +1,12 @@
 import React, { useRef, useContext, useState } from 'react';
-import './login.scss';
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE } from '../../../constants/ActionTypes';
-
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+// Local Dependencies
+import './login.scss';
 import { Context } from '../../../context/Context';
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE } from '../../../constants/ActionTypes';
+
 
 export const Login = () => {
   const userRef = useRef( '' );
@@ -13,6 +15,10 @@ export const Login = () => {
   const [ message, setMessage ] = useState( '' );
   const { dispatch, isFetching } = useContext( Context );
 
+  /**
+   * Used to hit API for login
+   * @param {*} e 
+   */
   const handleSubmit = async ( e ) => {
     e.preventDefault();
 

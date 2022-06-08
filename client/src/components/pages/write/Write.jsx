@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
-
-import './write.scss';
-import WriteImage from '../../../assets/images/post-image.jpg';
-import { Context } from '../../../context/Context';
 import axios from 'axios';
 
+// Local Dependencies
+import './write.scss';
+import { Context } from '../../../context/Context';
 
 export const Write = () => {
   const [ file, setFile ] = useState( null );
@@ -13,15 +12,14 @@ export const Write = () => {
 
   const { user } = useContext( Context );
 
-
+  /**
+   * Used to create new Post
+   * @param {*} e 
+   */
   const handleSubmit = async ( e ) => {
       e.preventDefault();
 
-      const newPost = {
-          title,
-          description: desc,
-          username: user.username
-      }
+      const newPost = { title, description: desc, username: user.username }
       if( file ) {
           const formData = new FormData();
           const fileName = Date.now() + file.name;
@@ -33,7 +31,7 @@ export const Write = () => {
           } catch (error) {}
       }
       try {
-        const res = await axios.post( '/posts', newPost );
+        const res = await axios.post( '/posts', newPost, { headers: { auth_token: 'Bearer ' + user.accessToken } } );
         window.location.replace(`/posts/${ res.data._id }`);
       } catch (error) {}
 
