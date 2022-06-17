@@ -15,7 +15,7 @@ export const SinglePost = () => {
 
   const location = useLocation();
   const postId = location.pathname.split('/')[ 2 ];
-  const { user } = useContext( Context );
+  const { user, accessToken } = useContext( Context );
 
   const PF = 'http://localhost:5000/uploads/';
 
@@ -46,7 +46,7 @@ export const SinglePost = () => {
 
       try {
           const res = axios.put(`/posts/${ post._id }`, updatedPost, { 
-            headers: { auth_token: 'Bearer ' + user.accessToken  } 
+            headers: { auth_token: 'Bearer ' + accessToken  } 
         }  );
 
           res && setUpdated( true );
@@ -62,7 +62,7 @@ export const SinglePost = () => {
   const handleDelete = async () => {
       try {
             await axios.delete(`/posts/${ postId }`, { 
-                    headers: { auth_token: 'Bearer ' + user.accessToken  } 
+                    headers: { auth_token: 'Bearer ' + accessToken  } 
                 } 
             )
             window.location.replace( '/' );

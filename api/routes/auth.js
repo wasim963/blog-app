@@ -7,8 +7,6 @@ const authMiddleware = require( '../middleware/authMiddleware' );
 
 // REGISTER
 router.post('/register', async( req, res ) => {
-
-    console.log('req', req)
     try {
 
         const salt = await bcrypt.genSalt(10);

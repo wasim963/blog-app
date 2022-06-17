@@ -31,7 +31,7 @@ export const Register = () => {
         try {
           const res = await axios.post('/auth/register', newUser );
           if( res.data.status === 'success' ) {
-            dispatch( { type: LOGIN_SUCCESS, payload: res.data.user } );
+            dispatch( { type: LOGIN_SUCCESS, payload: { accessToken: res.data?.user?.accessToken, user: res?.data?.user } } );
             res.data && window.location.replace('/')
           } else {
             dispatch( { type: LOGIN_FAILURE } );

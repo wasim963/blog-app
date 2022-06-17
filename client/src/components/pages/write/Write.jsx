@@ -10,7 +10,7 @@ export const Write = () => {
   const [ title, setTitle ] = useState( '' );
   const [ desc, setDesc ] = useState( '' );
 
-  const { user } = useContext( Context );
+  const { user, accessToken } = useContext( Context );
 
   /**
    * Used to create new Post
@@ -31,7 +31,7 @@ export const Write = () => {
           } catch (error) {}
       }
       try {
-        const res = await axios.post( '/posts', newPost, { headers: { auth_token: 'Bearer ' + user.accessToken } } );
+        const res = await axios.post( '/posts', newPost, { headers: { auth_token: 'Bearer ' + accessToken } } );
         window.location.replace(`/posts/${ res.data._id }`);
       } catch (error) {}
 

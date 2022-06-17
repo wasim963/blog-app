@@ -9,7 +9,7 @@ import { UPDATE_START, UPDATE_SUCCESS, UPDATE_FAILURE } from '../../../constants
 
 
 export const Settings = () => {
-  const { user, dispatch } = useContext( Context );
+  const { user, dispatch, accessToken } = useContext( Context );
 
   const [ file, setFile] = useState( null )
   const [ username , setUsername ] = useState( user.username )
@@ -43,7 +43,7 @@ export const Settings = () => {
       }
 
       try {
-        const res = await axios.put( `/users/${ user._id }`, updatedUser, { headers: { auth_token: 'Bearer ' + user.accessToken } } );
+        const res = await axios.put( `/users/${ user._id }`, updatedUser, { headers: { auth_token: 'Bearer ' + accessToken } } );
         dispatch( { type: UPDATE_SUCCESS, payload: res.data } );
         setSuccess( true )
       } catch ( error ) { 

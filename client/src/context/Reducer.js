@@ -15,25 +15,29 @@ export const Reducer = ( state, action ) => {
             return {
                 user: null,
                 isFetching: true,
-                error: false
+                error: false,
+                accessToken: null
             }
         case LOGIN_SUCCESS:
             return {
-                user: action.payload,
+                user: action.payload?.user,
                 isFetching:false,
-                error: false
+                error: false,
+                accessToken: action.payload?.accessToken
             }
         case LOGIN_FAILURE:
             return {
                 user: null,
                 isFetching: false,
-                error: true
+                error: true,
+                accessToken: null
             }
         case LOGOUT_SUCCESS:
             return {
                 user: null,
                 isFetching: false,
-                error:false
+                error:false,
+                accessToken: null
             }
         case UPDATE_START:
             return {
