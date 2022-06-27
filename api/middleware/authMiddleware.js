@@ -6,14 +6,15 @@ function authMiddleware( req, res, next ) {
     if( authHeader ) {
         const accessToken = authHeader.split(" ")[ 1 ];
 
-        jwt.verify( accessToken, 'mySecretKey', ( err, user ) => {
-            if( err ) {
-                return res.status( 403 ).json( "Token is invalid!" );
+        try {
+            const user = jwt.verify( accessToken, 'mySecretKey' );
+            if( user ) {
+                req.user = user;
+                next();
             }
-            req.user = user;
-
-            next();
-        } )
+        } catch (error) {
+            return res.status( 403 ).json( "Token is invalid!" );
+        }
 
     } else {
         return res.status( 401 ).json( "You are not authenticated!" );
