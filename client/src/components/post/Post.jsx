@@ -1,8 +1,8 @@
 import React from 'react';
-import './post.scss';
-
 import { Link } from 'react-router-dom';
-import PostImage from '../../assets/images/post-image.jpg';
+
+// Local Dependencies
+import './post.scss';
 export function Post({ post }) {
   const PF = 'http://localhost:5000/uploads/';
   const { categories } = post;

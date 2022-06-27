@@ -1,31 +1,32 @@
 import React, { useState, useContext } from 'react';
-import './settings.scss';
 import axios from 'axios';
 
+// Local Dependencies
+import './settings.scss';
 import { Sidebar } from '../../sidebar/Sidebar';
 import { Context } from '../../../context/Context';
 import { UPDATE_START, UPDATE_SUCCESS, UPDATE_FAILURE } from '../../../constants/ActionTypes';
 
 
 export const Settings = () => {
+  const { user, dispatch, accessToken } = useContext( Context );
+
   const [ file, setFile] = useState( null )
-  const [ username , setUsername ] = useState( '' )
-  const [ email , setEmail ] = useState( '' )
+  const [ username , setUsername ] = useState( user.username )
+  const [ email , setEmail ] = useState( user.email )
   const [ pass, setPass ] = useState( '' );
   const [ success , setSuccess ] = useState( false )
 
-  const { user, dispatch } = useContext( Context );
   const PF = 'http://localhost:5000/uploads/';
 
+  /**
+   * Used for updating user account
+   * @param {*} e 
+   */
   const handleSubmit = async ( e ) => {
       e.preventDefault();
 
-      const updatedUser = {
-          userId: user._id,
-          username,
-          email,
-          password: pass
-      }
+      const updatedUser = { userId: user._id, username, email, password: pass }
 
       dispatch( { type: UPDATE_START } );
 
@@ -42,8 +43,7 @@ export const Settings = () => {
       }
 
       try {
-        const res = await axios.put( `/users/${ user._id }`, updatedUser );
-
+        const res = await axios.put( `/users/${ user._id }`, updatedUser, { headers: { auth_token: 'Bearer ' + accessToken } } );
         dispatch( { type: UPDATE_SUCCESS, payload: res.data } );
         setSuccess( true )
       } catch ( error ) { 
@@ -92,6 +92,7 @@ export const Settings = () => {
                         placeholder={ user.username }
                         type="text"
                         id='username'
+                        value={ username }
                         onChange={ e => setUsername( e.target.value ) }
                     />
                 </div>
@@ -102,6 +103,7 @@ export const Settings = () => {
                         placeholder={ user.email }
                         type="text"
                         id='email'
+                        value={ email }
                         onChange={ e => setEmail( e.target.value ) }
                     />
                 </div>
@@ -111,6 +113,7 @@ export const Settings = () => {
                         className='ui-settings__wrapper__form__group__input textInput'
                         type="password"
                         id='pass'
+                        value={ pass }
                         onChange={ e => setPass( e.target.value ) }
                     />
                 </div>

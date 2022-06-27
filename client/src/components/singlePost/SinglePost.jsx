@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import './singlePost.scss';
-
-import singlePostImage from '../../assets/images/post-image.jpg';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Context } from '../../context/Context';
 
+// Local Dependencies
+import { Context } from '../../context/Context';
+import './singlePost.scss';
 
 export const SinglePost = () => {
   const [ post, setPost ] = useState( {} );
@@ -16,7 +15,7 @@ export const SinglePost = () => {
 
   const location = useLocation();
   const postId = location.pathname.split('/')[ 2 ];
-  const { user } = useContext( Context );
+  const { user, accessToken } = useContext( Context );
 
   const PF = 'http://localhost:5000/uploads/';
 
@@ -33,6 +32,9 @@ export const SinglePost = () => {
 
   }, [ postId ] );
 
+  /**
+   * Update a post
+   */
   const handleSubmit = async ( e ) => {
       e.preventDefault();
 
@@ -43,7 +45,9 @@ export const SinglePost = () => {
       }
 
       try {
-          const res = axios.put(`/posts/${ post._id }`, updatedPost );
+          const res = axios.put(`/posts/${ post._id }`, updatedPost, { 
+            headers: { auth_token: 'Bearer ' + accessToken  } 
+        }  );
 
           res && setUpdated( true );
           window.location.reload();
@@ -52,13 +56,16 @@ export const SinglePost = () => {
       }
   }
 
+  /**
+   * Delete a post
+   */
   const handleDelete = async () => {
       try {
-          await axios.delete(`/posts/${ postId }`, { data: {
-              username: user.username
-          } } )
-
-          window.location.replace( '/' );
+            await axios.delete(`/posts/${ postId }`, { 
+                    headers: { auth_token: 'Bearer ' + accessToken  } 
+                } 
+            )
+            window.location.replace( '/' );
       } catch (error) {
           
       }

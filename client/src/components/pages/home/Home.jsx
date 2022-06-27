@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
+// Local Dependencies
 import './home.scss'
 import { Header } from '../../header/Header';
 import { Posts } from '../../posts/Posts';

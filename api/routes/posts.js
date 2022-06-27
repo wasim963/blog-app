@@ -2,8 +2,10 @@ const router = require('express').Router();
 const User = require('../model/User');
 const Post = require('../model/Post');
 
+const authMiddleware = require( '../middleware/authMiddleware' );
+
 // Create Post
-router.post('/', async( req, res ) => {
+router.post('/', authMiddleware, async( req, res ) => {
     try {
         const newPost = new Post( req.body );
         const post = await newPost.save();
@@ -15,11 +17,11 @@ router.post('/', async( req, res ) => {
 } );
 
 // Update Post
-router.put( '/:id', async( req, res ) => {
+router.put( '/:id', authMiddleware, async( req, res ) => {
     
     try {
         const post = await Post.findById( req.params.id );
-        if( post.username === req.body.username ) {
+        if( post.username === req.user.username ) {
 
             try {
                const updatedPost = await Post.findByIdAndUpdate( req.params.id, {
@@ -41,14 +43,12 @@ router.put( '/:id', async( req, res ) => {
 } );
 
 // Delete Post
-router.delete( '/:id', async( req, res ) => {
+router.delete( '/:id', authMiddleware, async( req, res ) => {
 
     try {
         const post = await Post.findById( req.params.id );
-        if( post.username === req.body.username ) {
-
+        if( post.username === req.user.username ) {
             try {
-
                await Post.findByIdAndDelete( req.params.id );
                res.status( 200 ).json( "Post has been deleted!" );
             } catch ( err ) {
