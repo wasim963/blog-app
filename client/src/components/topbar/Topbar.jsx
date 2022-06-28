@@ -16,7 +16,7 @@ export function Topbar(props) {
     */
     const handleLogout = async () => {
         try {
-            const res = await axios.post( '/auth/logout/', {}, { headers: { auth_token: 'Bearer ' + accessToken } } )
+            const res = await axios.post( `/auth/logout/${ user._id }`, {}, { headers: { auth_token: 'Bearer ' + accessToken } } )
             if( res.data.status === 'success' ) { 
                 dispatch( { type: LOGOUT_SUCCESS } );
             } else {
