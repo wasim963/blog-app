@@ -2,9 +2,12 @@ const router = require('express').Router();
 const User = require('../model/User');
 const bcrypt = require('bcrypt');
 const jwt = require( 'jsonwebtoken' );
-const RefreshToken = require('../model/RefreshToken');
+const dotenv = require('dotenv');
 
+const RefreshToken = require('../model/RefreshToken');
 const authMiddleware = require( '../middleware/authMiddleware' );
+
+dotenv.config();
 
 // Function Generates accessToken
 const getAccessToken = async ( id, username ) => {
@@ -12,7 +15,7 @@ const getAccessToken = async ( id, username ) => {
         const token = jwt.sign( { 
             id,
             username
-        }, 'mySecretkey', { expiresIn: "300s" } )
+        }, process.env.SECRET_KEY, { expiresIn: '5m' } )
         
         return token;
     } catch (error) {
@@ -26,7 +29,7 @@ const getRefreshToken = async ( id, username ) => {
         const token = jwt.sign( { 
             id,
             username
-        }, 'myRefreshSecretkey', { expiresIn: "900s" } );
+        }, process.env.REFRESH_KEY, { expiresIn: '15m' } );
 
         return token;
     } catch (error) {
@@ -96,7 +99,7 @@ router.post( '/login', async( req, res ) => {
 // Logout User
 router.post( '/logout/:id', authMiddleware, async ( req, res ) => {
     try {
-        await RefreshToken.findByIdAndDelete( req.params.id );
+        const token = await RefreshToken.findOneAndDelete( { userId: req.params.id } )
         return res.status( 200 ).json( { status: "success", message: 'Successfully Logged Out!' } );
     } catch (error) {
         res.status(500).json(err);

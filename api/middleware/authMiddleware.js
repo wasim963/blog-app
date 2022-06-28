@@ -1,4 +1,7 @@
 const jwt = require( 'jsonwebtoken' );
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 function authMiddleware( req, res, next ) {
 
@@ -7,7 +10,7 @@ function authMiddleware( req, res, next ) {
         const accessToken = authHeader.split(" ")[ 1 ];
 
         try {
-            const user = jwt.verify( accessToken, 'mySecretKey' );
+            const user = jwt.verify( accessToken, process.env.SECRET_KEY );
             if( user ) {
                 req.user = user;
                 next();
