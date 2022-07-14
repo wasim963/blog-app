@@ -133,3 +133,9 @@
         }
     }
 }
+
+// preloader css
+.ui-singlePost-preloader {
+    height: calc( 100vh - 50px );
+    width: 100%;
+}

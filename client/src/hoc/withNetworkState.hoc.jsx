@@ -20,18 +20,24 @@ const withNetworkState = ( PreloaderView, SuccessView, ErrorView = networkError 
             if( isFetching ) {
                 return(
                     <PreloaderView
+                        isFetching={ isFetching }
+                        networkStatus={ networkStatus }
                         { ...restProps }
                     />
                 )
             }else if( networkStatus === 'failure' ) {
                 return(
                     <ErrorView
+                        isFetching={ isFetching }
+                        networkStatus={ networkStatus }
                         { ...restProps }
                     />
                 )
             } else {
                 return (
                     <SuccessView
+                        isFetching={ isFetching }
+                        networkStatus={ networkStatus }
                       { ...restProps }
                     />
                 )
