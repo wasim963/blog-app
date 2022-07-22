@@ -103,7 +103,20 @@ _singlePost.defaultProps = {};
 const SinglePostPreloader = () => {
     return(
         <div className='ui-singlePost-preloader' >
-            <h2>Single Post Prelaoder</h2>
+            <div className="ui-singlePost-preloader__image"></div>
+            <div className="ui-singlePost-preloader__body">
+                <div className="ui-singlePost-preloader__body__header"></div>
+                <div className="ui-singlePost-preloader__body__info">
+                    {
+                        [ 1, 2 ].map( ( item, index ) => {
+                            return(
+                                <div className="ui-singlePost-preloader__body__info--item"></div>
+                            )
+                        } )
+                    }
+                </div>
+                <div className="ui-singlePost-preloader__body__desc"></div>
+            </div>
         </div>
     );
 }

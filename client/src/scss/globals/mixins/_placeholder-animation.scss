@@ -1,0 +1,16 @@
+// desktop animation
+@keyframes animatePlaceholder {
+	from {
+		background-color: rgb(228, 226, 226);
+		background-color: var( rgb(144, 141, 141), rgb(228, 226, 226) );
+	}
+
+	to {
+		background-color: rgb(245, 242, 242);
+		background-color: var( rgb(251, 245, 245), rgb(245, 242, 242) );
+	}
+}
+
+@mixin placeholder-animation() {
+	animation: animatePlaceholder 1s alternate infinite cubic-bezier(.53,.32,.73,.48);
+}
