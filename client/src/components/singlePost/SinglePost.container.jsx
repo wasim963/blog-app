@@ -5,6 +5,7 @@ import axios from 'axios';
 // Local Dependencies
 import { Context } from '../../context/Context';
 import { singlePost as SinglePostView } from './singlePost.view';
+import { NETWORK_STATUS } from '../../constants/common';
 
 export const SinglePost = () => {
 
@@ -25,11 +26,11 @@ export const SinglePost = () => {
             try {
                 const res = await axios.get(`/posts/${ postId }`);
                 setPost( res.data );
-                setNetworkStatus( 'success' );
+                setNetworkStatus( NETWORK_STATUS.SUCCESS );
                 setIsFetching( false );
             } catch (err) {
                 console.log( err );
-                setNetworkStatus( 'failure' );
+                setNetworkStatus( NETWORK_STATUS.FAILURE );
                 setIsFetching( false );
             }
         }
@@ -90,9 +91,11 @@ export const SinglePost = () => {
             setUpdated={ setUpdated }
             handleDelete= { handleDelete }
             handleSubmit= { handleSubmit }
-
             isFetching={ isFetching }
             networkStatus={ networkStatus }
+            errorViewConfig = {
+                { errorClassname: 'ui-singlePost__error' }
+            }
         />
     );
 }
