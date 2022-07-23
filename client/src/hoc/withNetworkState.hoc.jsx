@@ -2,6 +2,8 @@ import { Component } from 'react';
 
 // Local Dependencies
 import { networkError } from '../generic/networkError/networkError.view';
+import { NETWORK_STATUS } from '../constants/common';
+
 
 const withNetworkState = ( PreloaderView, SuccessView, ErrorView = networkError ) => {
 
@@ -23,7 +25,7 @@ const withNetworkState = ( PreloaderView, SuccessView, ErrorView = networkError 
                         { ...restProps }
                     />
                 )
-            } else if( networkStatus === 'success' ) {
+            } else if( networkStatus === NETWORK_STATUS.SUCCESS ) {
                 return (
                     <SuccessView
                         isFetching={ isFetching }
